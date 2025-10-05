@@ -1,0 +1,20 @@
+mkdir -p .devcontainer
+cat > .devcontainer/devcontainer.json <<'JSON'
+{
+  "name": "ga2-6a8672",
+  "image": "mcr.microsoft.com/devcontainers/base:0",
+  "features": {
+    "ghcr.io/devcontainers/features/python:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "astral-sh.uv",
+        "ms-python.python"
+      ]
+    }
+  },
+  "postCreateCommand": "bash -lc \"if ! command -v uv >/dev/null 2>&1; then curl -LsSf https://astral.sh/uv/install.sh | sh; fi; export PATH=\\$HOME/.local/bin:\\$PATH; uv pip install fastapi\"",
+  "remoteUser": "vscode"
+}
+JSON
